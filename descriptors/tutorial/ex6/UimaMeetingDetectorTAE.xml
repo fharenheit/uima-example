@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier"
+                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xsi:schemaLocation="http://uima.apache.org/resourceSpecifier resourceSpecifierSchema.xsd">
+
+	<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+	<primitive>false</primitive>
+
+	<delegateAnalysisEngineSpecifiers>
+		<delegateAnalysisEngine key="MeetingDetector">
+			<import location="../ex4/MeetingDetectorTAE.xml"/>
+		</delegateAnalysisEngine>
+
+		<delegateAnalysisEngine key="UimaMeetingAnnotator">
+			<import location="UimaMeetingAnnotator.xml"/>
+		</delegateAnalysisEngine>
+
+		<delegateAnalysisEngine key="UimaAcronymAnnotator">
+			<import location="UimaAcronymAnnotator.xml"/>
+		</delegateAnalysisEngine>
+	</delegateAnalysisEngineSpecifiers>
+
+	<analysisEngineMetaData>
+		<name>UIMA Meeting Detector TAE</name>
+		<description>Annotates meeting notices, and also marks those meetings whose topic
+			is likely to be related to UIMA. Also annotates all UIMA acronyms and provides
+			their expanded form.
+			This TAE also demonstrates using the Resource Manager to share data between
+			annotators. Both the UimaMeetingAnnotator and UimaAcronymAnnotator share a
+			common resource file.
+		</description>
+
+		<flowConstraints>
+			<fixedFlow>
+				<node>MeetingDetector</node>
+				<node>UimaMeetingAnnotator</node>
+				<node>UimaAcronymAnnotator</node>
+			</fixedFlow>
+		</flowConstraints>
+
+		<capabilities>
+			<capability>
+				<inputs/>
+				<outputs>
+					<type allAnnotatorFeatures="true">
+						org.apache.uima.tutorial.Meeting
+					</type>
+					<type allAnnotatorFeatures="true">
+						org.apache.uima.tutorial.UimaMeeting
+					</type>
+					<type allAnnotatorFeatures="true">
+						org.apache.uima.tutorial.UimaAcronym
+					</type>
+				</outputs>
+				<languagesSupported>
+					<language>en</language>
+				</languagesSupported>
+			</capability>
+		</capabilities>
+		<operationalProperties>
+			<modifiesCas>true</modifiesCas>
+			<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+			<outputsNewCASes>false</outputsNewCASes>
+		</operationalProperties>
+	</analysisEngineMetaData>
+
+	<resourceManagerConfiguration>
+		<externalResources>
+			<externalResource>
+				<name>UimaAcronymTableFile</name>
+				<description>A table containing UIMA acronyms and their exanded forms.</description>
+				<fileResourceSpecifier>
+					<fileUrl>file:org/apache/uima/tutorial/ex6/uimaAcronyms.txt</fileUrl>
+				</fileResourceSpecifier>
+				<implementationName>org.apache.uima.tutorial.ex6.StringMapResource_impl</implementationName>
+			</externalResource>
+		</externalResources>
+		<externalResourceBindings>
+			<externalResourceBinding>
+				<key>UimaAcronymAnnotator/AcronymTable</key>
+				<resourceName>UimaAcronymTableFile</resourceName>
+			</externalResourceBinding>
+			<externalResourceBinding>
+				<key>UimaMeetingAnnotator/UimaTermTable</key>
+				<resourceName>UimaAcronymTableFile</resourceName>
+			</externalResourceBinding>
+		</externalResourceBindings>
+	</resourceManagerConfiguration>
+</analysisEngineDescription>
+

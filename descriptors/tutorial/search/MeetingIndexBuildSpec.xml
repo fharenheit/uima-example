@@ -1,0 +1,51 @@
+<indexBuildSpecification>
+
+	<indexBuildItem>
+		<name>org.apache.uima.examples.tokenizer.Token</name>
+		<indexRule>
+			<style name="Term"/>
+		</indexRule>
+	</indexBuildItem>
+
+	<indexBuildItem>
+		<name>org.apache.uima.examples.tokenizer.Sentence</name>
+		<indexRule>
+			<style name="Breaking"/>
+		</indexRule>
+	</indexBuildItem>
+
+	<indexBuildItem>
+		<name>org.apache.uima.tutorial.Meeting</name>
+		<indexRule>
+			<style name="Annotation"/>
+		</indexRule>
+	</indexBuildItem>
+
+	<indexBuildItem>
+		<name>org.apache.uima.tutorial.RoomNumber</name>
+		<indexRule>
+			<style name="Annotation">
+				<attributeMappings>
+					<mapping>
+						<feature>building</feature>
+						<indexName>building</indexName>
+					</mapping>
+				</attributeMappings>
+			</style>
+		</indexRule>
+	</indexBuildItem>
+
+	<indexBuildItem>
+		<name>org.apache.uima.tutorial.DateAnnot</name>
+		<indexRule>
+			<style name="Annotation"/>
+		</indexRule>
+	</indexBuildItem>
+
+	<indexBuildItem>
+		<name>org.apache.uima.tutorial.TimeAnnot</name>
+		<indexRule>
+			<style name="Annotation"/>
+		</indexRule>
+	</indexBuildItem>
+</indexBuildSpecification>

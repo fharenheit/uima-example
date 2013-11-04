@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier"
+                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xsi:schemaLocation="http://uima.apache.org/resourceSpecifier resourceSpecifierSchema.xsd">
+
+	<frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+	<primitive>true</primitive>
+	<annotatorImplementationName>org.apache.uima.tutorial.ex6.UimaMeetingAnnotator</annotatorImplementationName>
+	<analysisEngineMetaData>
+		<name>UIMA Meeting Annotator</name>
+		<description>Iterates over Meeting annotations and annotates a meeting as a UimaMeeting if a UIMA acronym occurs in close proximity to that meeting.</description>
+		<version>1.0</version>
+		<vendor>The Apache Software Foundation</vendor>
+		<configurationParameters/>
+		<configurationParameterSettings/>
+		<typeSystemDescription>
+			<imports>
+				<import location="TutorialTypeSystem.xml"/>
+			</imports>
+		</typeSystemDescription>
+		<capabilities>
+			<capability>
+				<inputs>
+					<type allAnnotatorFeatures="true">org.apache.uima.tutorial.Meeting</type>
+				</inputs>
+				<outputs>
+					<type allAnnotatorFeatures="true">org.apache.uima.tutorial.UimaMeeting</type>
+				</outputs>
+				<languagesSupported>
+					<language>en</language>
+				</languagesSupported>
+			</capability>
+		</capabilities>
+		<operationalProperties>
+			<modifiesCas>true</modifiesCas>
+			<multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+			<outputsNewCASes>false</outputsNewCASes>
+		</operationalProperties>
+	</analysisEngineMetaData>
+	<externalResourceDependencies>
+		<externalResourceDependency>
+			<key>UimaTermTable</key>
+			<description>Map whose keps are UIMA terms.</description>
+			<interfaceName>org.apache.uima.tutorial.ex6.StringMapResource</interfaceName>
+			<optional>false</optional>
+		</externalResourceDependency>
+	</externalResourceDependencies>
+</analysisEngineDescription>
